@@ -50,7 +50,6 @@ services:
             context: ./AnatrocFrontEnd/dockerfiles/node
         volumes:
             - ./AnatrocFrontEnd/app:/app
-        command: "tail -f /dev/null"
         links:
             - nginx_reverse_proxy
         networks:
