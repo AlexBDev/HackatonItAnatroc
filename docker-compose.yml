@@ -1,0 +1,63 @@
+version: '3.0'
+
+services:
+    nginx_reverse_proxy:
+        build:
+            context: dockerfiles/nginx/reverse-proxy
+        ports:
+            - "443:443"
+            - "80:80"
+        networks:
+            static-network:
+                ipv4_address: 172.45.0.10
+
+    nginx_php:
+        build:
+            context: ./HackatonItAnatrocApi/dockerfiles/nginx/php
+        volumes:
+            - ./HackatonItAnatrocApi/app:/usr/share/nginx/html
+        links:
+            - php
+        depends_on:
+            - php
+        networks:
+            static-network:
+
+    php:
+        build:
+            context: ./HackatonItAnatrocApi/dockerfiles/php
+            args:
+                - user=${USER}
+        volumes:
+            - ./HackatonItAnatrocApi/app:/usr/share/nginx/html
+        networks:
+            static-network:
+
+    nginx_node:
+        build:
+            context: ./AnatrocFrontEnd/dockerfiles/nginx/node
+        volumes:
+            - ./AnatrocFrontEnd/app:/usr/share/nginx/html
+        depends_on:
+            - node
+        links:
+            - node
+        networks:
+            static-network:
+
+    node:
+        build:
+            context: ./AnatrocFrontEnd/dockerfiles/node
+        volumes:
+            - ./AnatrocFrontEnd/app:/app
+        command: "tail -f /dev/null"
+        links:
+            - nginx_reverse_proxy
+        networks:
+            static-network:
+
+networks:
+    static-network:
+        ipam:
+            config:
+                - subnet: 172.45.0.0/24
