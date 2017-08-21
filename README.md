@@ -16,7 +16,7 @@ $ git pull --recurse-submodules
 
 Add this line to /etc/hosts
 ```
-172.45.0.0 api.anroc front.anatroc
+172.45.0.10 api.anatroc front.anatroc
 ```
 
 Run `docker-compose up -d`
