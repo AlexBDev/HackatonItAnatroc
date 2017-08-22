@@ -5,13 +5,13 @@
 Init submodule repositories
 
 ```bash
-$ git submodule update --init --recursive`
+$ git submodule update --init --recursive
 ```
 
 To update repositories
 
 ```bash
-$ git pull --recurse-submodules
+$ git submodule update --recursive --remote
 ```
 
 Add this line to /etc/hosts
