@@ -10,6 +10,7 @@ services:
         networks:
             static-network:
                 ipv4_address: 172.45.0.10
+        restart: always
 
     nginx_php:
         build:
