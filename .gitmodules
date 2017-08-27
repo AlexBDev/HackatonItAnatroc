@@ -1,6 +1,8 @@
 [submodule "HackatonItAnatrocApi"]
 	path = HackatonItAnatrocApi
 	url = git@github.com:AlexBDev/HackatonItAnatrocApi.git
+	branch = master
 [submodule "AnatrocFrontEnd"]
 	path = AnatrocFrontEnd
 	url = git@github.com:YannigSmagghe/AnatrocFrontEnd.git
+	branch = master
