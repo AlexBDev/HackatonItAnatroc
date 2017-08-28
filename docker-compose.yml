@@ -28,7 +28,9 @@ services:
         build:
             context: ./HackatonItAnatrocApi/dockerfiles/php
             args:
-                - user=${USER}
+                - USER=${USER}
+                - USER_GID=${USER_GID}
+                - USER_UID=${USER_UID}
         volumes:
             - ./HackatonItAnatrocApi/app:/usr/share/nginx/html
         links:
@@ -62,6 +64,10 @@ services:
     node:
         build:
             context: ./AnatrocFrontEnd/dockerfiles/node
+            args:
+                - USER=${USER}
+                - USER_GID=${USER_GID}
+                - USER_UID=${USER_UID}
         volumes:
             - ./AnatrocFrontEnd/app:/app
         links:
