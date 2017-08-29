@@ -35,7 +35,7 @@ services:
             args:
                 - USER=${USER}
                 - USER_GID=${USER_GID:-1000}
-                - USER_UIDr=${USER_GID:-1000}
+                - USER_UID=${USER_GID:-1000}
         volumes:
             - ./HackatonItAnatrocApi/app:/usr/share/nginx/html
         links:
@@ -74,7 +74,7 @@ services:
             args:
                 - USER=${USER}
                 - USER_GID=${USER_GID:-1000}
-                - USER_UIDr=${USER_GID:-1000}
+                - USER_UID=${USER_GID:-1000}
         volumes:
             - ./AnatrocFrontEnd/app:/app
         links:

@@ -1,5 +1,8 @@
 FROM nginx:1.13
 
+ARG DNS_FRONT
+ARG DNS_API
+
 RUN apt-get update && apt-get install -y zip openssl curl python
 
 RUN mkdir /etc/nginx/ssl/ && cd /etc/nginx/ssl && \
