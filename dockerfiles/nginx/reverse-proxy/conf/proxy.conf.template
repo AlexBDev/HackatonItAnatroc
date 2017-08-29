@@ -11,24 +11,24 @@ http {
     proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header   X-Forwarded-Host $server_name;
 
-    upstream api.anatroc {
+    upstream %DNS_API% {
         server nginx_php;
     }
 
-    upstream front.anatroc {
+    upstream %DNS_FRONT% {
         server nginx_node;
     }
 
     server {
         listen 80;
-        server_name api.anatroc;
+        server_name %DNS_API%;
 
         return 301 https://$server_name$request_uri;
     }
 
     server {
         listen 443 ssl;
-        server_name api.anatroc;
+        server_name %DNS_API%;
 
         ssl                        on;
         ssl_protocols              TLSv1 TLSv1.1 TLSv1.2;
@@ -36,7 +36,7 @@ http {
         ssl_certificate_key        /etc/nginx/ssl/cert.key;
 
         location / {
-            proxy_pass         http://api.anatroc;
+            proxy_pass         http://%DNS_API%;
             proxy_set_header    X-Real-IP $remote_addr;
             proxy_set_header    X-HTTPS   'True';
         }
@@ -44,14 +44,14 @@ http {
 
     server {
         listen 80;
-        server_name front.anatroc;
+        server_name %DNS_FRONT%;
 
         return 301 https://$server_name$request_uri;
     }
 
     server {
         listen 443 ssl;
-        server_name front.anatroc;
+        server_name %DNS_FRONT%;
 
         ssl                        on;
         ssl_protocols              TLSv1 TLSv1.1 TLSv1.2;
@@ -59,7 +59,7 @@ http {
         ssl_certificate_key        /etc/nginx/ssl/cert.key;
 
         location / {
-            proxy_pass         http://front.anatroc;
+            proxy_pass         http://%DNS_FRONT%;
             proxy_set_header    X-Real-IP $remote_addr;
             proxy_set_header    X-HTTPS   'True';
         }
@@ -68,14 +68,11 @@ http {
     server {
         server_name *.ngrok.io;
 
-        #location / {
-        #    proxy_pass     http://api.anatroc;
-        #    proxy_redirect off;
-        #}
-
         location / {
-            proxy_pass     http://front.anatroc;
+            proxy_pass     http://%DNS_FRONT%;
             proxy_redirect http:// https://;
         }
     }
 }
+
+# yum update && yum
