@@ -1,0 +1,18 @@
+version: '3.0'
+services:
+      portainer:
+          image: portainer/portainer
+          ports:
+              - "9000:9000"
+          volumes:
+              - /var/run/docker.sock:/var/run/docker.sock
+              - /opt/portainer/data:/data
+          restart: always
+          networks:
+            portainer-network:
+                ipv4_address: 172.46.0.10
+networks:
+  portainer-network:
+     ipam:
+         config:
+             - subnet: 172.46.0.0/24
