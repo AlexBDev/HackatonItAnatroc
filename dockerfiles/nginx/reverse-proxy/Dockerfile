@@ -2,6 +2,7 @@ FROM nginx:1.13
 
 ARG DNS_FRONT
 ARG DNS_API
+ARG DNS_PORTAINER
 
 RUN apt-get update && apt-get install -y zip openssl curl python
 
@@ -15,3 +16,4 @@ COPY ./conf/proxy.conf.template /etc/nginx/nginx.conf
 
 RUN sed -i "s/%DNS_FRONT%/$DNS_FRONT/" /etc/nginx/nginx.conf
 RUN sed -i "s/%DNS_API%/$DNS_API/" /etc/nginx/nginx.conf
+RUN sed -i "s/%DNS_PORTAINER%/$DNS_PORTAINER/" /etc/nginx/nginx.conf

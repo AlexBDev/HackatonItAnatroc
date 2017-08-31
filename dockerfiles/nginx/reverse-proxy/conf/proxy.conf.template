@@ -11,6 +11,10 @@ http {
     proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header   X-Forwarded-Host $server_name;
 
+    upstream portainer {
+        server 172.45.0.42:9000;
+    }
+
     upstream %DNS_API% {
         server nginx_php;
     }
@@ -63,6 +67,24 @@ http {
             proxy_set_header    X-Real-IP $remote_addr;
             proxy_set_header    X-HTTPS   'True';
         }
+    }
+
+    server {
+        listen 80;
+        server_name %DNS_PORTAINER%;
+
+
+          location / {
+              proxy_http_version 1.1;
+              proxy_set_header Connection "";
+              proxy_pass http://portainer/;
+          }
+          location /portainer/api/websocket/ {
+              proxy_set_header Upgrade $http_upgrade;
+              proxy_set_header Connection "upgrade";
+              proxy_http_version 1.1;
+              proxy_pass http://portainer/api/websocket/;
+          }
     }
 
     server {
