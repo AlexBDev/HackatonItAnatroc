@@ -19,7 +19,9 @@ Add this line to /etc/hosts
 172.45.0.10 api.anatroc front.anatroc
 ```
 
-Run `docker-compose up -d`
+Run `bootstrap.sh`
+
+This will be generate a app.env file you can change the content as you want
 
 Setup each app checkout the internal README and go to http://api.anatroc or http://front.anatroc
 
