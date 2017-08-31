@@ -5,8 +5,8 @@ services:
         build:
             context: dockerfiles/nginx/reverse-proxy
             args:
-                - DNS_API=${DNS_API:-api.anatroc}
-                - DNS_FRONT=${DNS_FRONT:-front.anatroc}
+                - DNS_API=${DNS_API}
+                - DNS_FRONT=${DNS_FRONT}
         ports:
             - "443:443"
             - "80:80"
@@ -19,7 +19,7 @@ services:
         build:
             context: ./HackatonItAnatrocApi/dockerfiles/nginx/php
             args:
-                - DNS_API=${DNS_API:-api.antroc}
+                - DNS_API=${DNS_API}
         volumes:
             - ./HackatonItAnatrocApi/app:/usr/share/nginx/html
         links:
@@ -34,8 +34,8 @@ services:
             context: ./HackatonItAnatrocApi/dockerfiles/php
             args:
                 - USER=${USER}
-                - USER_GID=${USER_GID:-1000}
-                - USER_UID=${USER_GID:-1000}
+                - USER_GID=${USER_GID}
+                - USER_UID=${USER_GID}
         volumes:
             - ./HackatonItAnatrocApi/app:/usr/share/nginx/html
         links:
@@ -58,7 +58,7 @@ services:
         build:
             context: ./AnatrocFrontEnd/dockerfiles/nginx/node
             args:
-                - DNS_FRONT=${DNS_FRONT:-front.anatroc}
+                - DNS_FRONT=${DNS_FRONT}
         volumes:
             - ./AnatrocFrontEnd/app:/usr/share/nginx/html
         depends_on:
@@ -73,8 +73,9 @@ services:
             context: ./AnatrocFrontEnd/dockerfiles/node
             args:
                 - USER=${USER}
-                - USER_GID=${USER_GID:-1000}
-                - USER_UID=${USER_GID:-1000}
+                - USER_GID=${USER_GID}
+                - USER_UID=${USER_GID}
+                - API_URL=${API_URL}
         volumes:
             - ./AnatrocFrontEnd/app:/app
         links:

@@ -21,10 +21,10 @@ fi
 
 if [ ! -z "$USER_NAME" ] && [ ! -z "$USER_UID" ] && [ ! -z "$USER_GID" ]
 then
-    cat <<EOT > .envfile
-    export USER_NAME=$USER_NAME
-    export USER_UID=$USER_UID
-    export USER_GID=$USER_GID
+cat <<EOT > app.env
+export USER_NAME=$USER_NAME
+export USER_UID=$USER_UID
+export USER_GID=$USER_GID
 EOT
 exit 0
 fi
