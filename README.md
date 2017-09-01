@@ -1,5 +1,10 @@
 # HackatonItAnatroc
 
+## Pre required
+
+docker 17.06.1-ce
+docker-compose 1.15.0
+
 ## Install
 
 Init submodule repositories
@@ -19,9 +24,21 @@ Add this line to /etc/hosts
 172.45.0.10 api.anatroc front.anatroc
 ```
 
-Run `bootstrap.sh`
+Run `user-permissions.sh` this will create app.env file.
 
-This will be generate a app.env file you can change the content as you want
+Complete app.env with
+
+```
+export DNS_API=api.anatroc.ovh
+export DNS_FRONT=anatroc.ovh
+export DNS_PORTAINER=portainer.anatroc.ovh
+export API_URL=https://api.anatroc.ovh
+```
+
+Setup the HackatonItAnatroc/app/app/config/parameters.yml file
+
+Then `source app.env && docker-compose up -d`
+
 
 Setup each app checkout the internal README and go to http://api.anatroc or http://front.anatroc
 
